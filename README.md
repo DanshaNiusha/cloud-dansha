@@ -1,0 +1,5 @@
+CREATE TABLE `payment` (
+  `id` bigint(64) NOT NULL AUTO_INCREMENT,
+  `serial` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;

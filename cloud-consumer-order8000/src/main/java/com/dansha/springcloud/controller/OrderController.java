@@ -4,6 +4,7 @@ import com.danshacloud.entities.CommonResult;
 import com.danshacloud.entities.Payment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +18,9 @@ import java.util.List;
 @RestController
 @Slf4j
 public class OrderController {
-    private static final String PAYMENT_URL="http://localhost:8001";
-    //通过在eureka上注册过的微服务名称调用
-    // private static final String PAYMENT_URL = "http://CLOUD-PROVIDER-SERVICE";
+    // private static final String PAYMENT_URL="http://localhost:8001";
+    //通过在eureka上注册过的微服务名称调用,写死只能调用一台
+    private static final String PAYMENT_URL = "http://CLOUD-PROVIDER-SERVICE";
     
     @Autowired
     private RestTemplate restTemplate;
@@ -27,9 +28,9 @@ public class OrderController {
     /**
      * 自定义负载均衡规则
      */
-    // @Resource
+    // @Autowired
     // private LoadBalancer loadBalancer;
-    // @Resource
+    // @Autowired
     // private DiscoveryClient discoveryClient;
     
     @GetMapping("/consumer/payment/create")

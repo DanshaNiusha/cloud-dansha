@@ -36,8 +36,8 @@ public class PaymentService {
     })
     public String paymentInfo_Timeout(Integer id) {
         // 执行5s
-        int timeNumber = 5;
-        int age = 10/0;
+        int timeNumber = 1;
+        // int age = 10/0;
         try {
             TimeUnit.SECONDS.sleep(timeNumber);
         } catch (Exception e) {

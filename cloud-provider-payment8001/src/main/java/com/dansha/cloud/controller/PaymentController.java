@@ -61,14 +61,18 @@ public class PaymentController {
     @GetMapping(value = "/payment/get/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id){
         Payment payment = paymentService.getPaymentById(id);
-        log.info("*****插入结果："+payment);
+        log.info("****查询结果："+payment);
         if(payment != null){
             return new CommonResult(200,"查询成功cdw!!,serverPort："+serverPort,payment);
         }else{
             return new CommonResult(444,"没有对应记录,查询ID："+id,null);
         }
     }
-
+    
+    /**
+     * 负载均衡测试
+     * @return
+     */
     @GetMapping(value = "/payment/lb")
     public String getPaymentLB(){
         return serverPort;
@@ -85,8 +89,8 @@ public class PaymentController {
         return serverPort;
     }
 
-    @GetMapping("/payment/zipkin")
-    public String paymentZipkin(){
-        return "hi, i'am paymentzipkin server fall back,welcome to atguigu, O(∩_∩)O哈哈~";
-    }
+    // @GetMapping("/payment/zipkin")
+    // public String paymentZipkin(){
+    //     return "hi, i'am paymentzipkin server fall back,welcome to atguigu, O(∩_∩)O哈哈~";
+    // }
 }

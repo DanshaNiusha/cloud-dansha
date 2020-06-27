@@ -1,4 +1,4 @@
-package springcloud.lb;
+package com.dansha.springcloud.lb;
 
 import com.dansha.springcloud.lb.LoadBalancer;
 import org.springframework.cloud.client.ServiceInstance;
@@ -9,14 +9,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Ribbon 手写轮询算法
- * @author wsk
  * @date 2020/3/13 17:16
  */
 @Component
 public class MyLB implements LoadBalancer {
     //原子类
-    private AtomicInteger atomicInteger = new AtomicInteger(0);
-
+    private final AtomicInteger atomicInteger = new AtomicInteger(0);
+    
     public final int getAndIncrement(){
         int current;
         int next;

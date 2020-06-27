@@ -26,11 +26,12 @@ public class OrderController {
     @Autowired
     private RestTemplate restTemplate;
     
-    // /**
-    //  * 自定义负载均衡规则
-    //  */
-    // @Autowired
-    // private LoadBalancer loadBalancer;
+    /**
+     * 自定义负载均衡规则
+     */
+    @Autowired
+    private LoadBalancer loadBalancer;
+    
     @Autowired
     private DiscoveryClient discoveryClient;
     
@@ -61,16 +62,16 @@ public class OrderController {
      * @param
      * @return
      */
-    // @GetMapping(value = "/consumer/payment/lb")
-    // public String getPaymentLB(){
-    //     List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PROVIDER-SERVICE");
-    //     if(instances == null || instances.size() <= 0){
-    //         return null;
-    //     }
-    //     ServiceInstance serviceInstance = loadBalancer.instances(instances);
-    //     URI uri = serviceInstance.getUri();
-    //     return restTemplate.getForObject(uri+"/payment/lb",String.class);
-    // }
+    @GetMapping(value = "/consumer/payment/lb")
+    public String getPaymentLB(){
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PROVIDER-SERVICE");
+        if(instances == null || instances.size() <= 0){
+            return null;
+        }
+        ServiceInstance serviceInstance = loadBalancer.instances(instances);
+        URI uri = serviceInstance.getUri();
+        return restTemplate.getForObject(uri+"/payment/lb",String.class);
+    }
     //============> zipkin + sleuth
     // @GetMapping("/consumer/payment/zipkin")
     // public String paymentZipkin() {

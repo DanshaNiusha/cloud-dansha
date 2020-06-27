@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * 模拟 ILoadBalancer 的接口，选择哪一个负载算法和机器
  *
- * @author wsk
  * @date 2020/3/13 17:11
  */
 public interface LoadBalancer {

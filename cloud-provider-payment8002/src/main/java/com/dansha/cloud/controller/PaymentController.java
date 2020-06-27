@@ -6,12 +6,15 @@ import com.danshacloud.entities.Payment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -24,21 +27,21 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
-    // @Resource
-    // private DiscoveryClient discoveryClient;
+    @Resource
+    private DiscoveryClient discoveryClient;
 
-    // @GetMapping(value = "/payment/discovery")
-    // public Object discovery(){
-    //     List<String> services = discoveryClient.getServices();  //得到所有的微服务
-    //     for (String element : services) {
-    //         log.info("*****element:"+element);
-    //     }
-    //     List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PROVIDER-SERVICE"); //得到一个具体微服务的所有实例
-    //     for (ServiceInstance instance : instances){
-    //         log.info(instance.getServiceId()+"\t"+instance.getHost()+"\t"+instance.getPort()+"\t"+instance.getUri());
-    //     }
-    //     return this.discoveryClient;
-    // }
+    @GetMapping(value = "/payment/discovery")
+    public Object discovery(){
+        List<String> services = discoveryClient.getServices();  //得到所有的微服务
+        for (String element : services) {
+            log.info("*****element:"+element);
+        }
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PROVIDER-SERVICE"); //得到一个具体微服务的所有实例
+        for (ServiceInstance instance : instances){
+            log.info(instance.getServiceId()+"\t"+instance.getHost()+"\t"+instance.getPort()+"\t"+instance.getUri());
+        }
+        return this.discoveryClient;
+    }
 
     //只传给前端CommonResult，不需要前端了解其他的组件
     @PostMapping(value = "/payment/create")

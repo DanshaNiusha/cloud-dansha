@@ -1,2 +1,7 @@
 .idea/uiDesigner.xml
 target
+cloud-consumer-order8000/cloud-consumer-order8000.iml
+cloud-eureka-server-7001/cloud-eureka-server-7001.iml
+cloud-provider-payment8001/src/test/
+out/
+/cloud-api-commons/target/

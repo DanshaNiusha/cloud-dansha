@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--映射那个dao, dao的全路径-->
-<mapper namespace="com.dansha.cloud.dao.PaymentDao">
+<mapper namespace="PaymentDao">
     <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
         insert into payment(serial) values(#{serial})
     </insert>

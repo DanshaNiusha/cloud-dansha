@@ -1,6 +1,5 @@
-package com.dansha.springcloud.lb;
+package com.dansha.cloud.springcloud.lb;
 
-import com.dansha.springcloud.lb.LoadBalancer;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.dansha.springcloud.lb;
+package com.dansha.cloud.springcloud.lb;
 
 import org.springframework.cloud.client.ServiceInstance;
 

@@ -1,6 +1,6 @@
-package com.dansha.springcloud;
+package com.dansha.cloud.springcloud;
 
-import com.dansha.myrule.MySelfRule;
+import com.dansha.cloud.myrule.MySelfRule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;

@@ -1,4 +1,4 @@
-package com.dansha.myrule;
+package com.dansha.cloud.myrule;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;

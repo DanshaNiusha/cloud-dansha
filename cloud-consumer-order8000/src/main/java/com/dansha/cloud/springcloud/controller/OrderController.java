@@ -1,6 +1,6 @@
-package com.dansha.springcloud.controller;
+package com.dansha.cloud.springcloud.controller;
 
-import com.dansha.springcloud.lb.LoadBalancer;
+import com.dansha.cloud.springcloud.lb.LoadBalancer;
 import com.danshacloud.entities.CommonResult;
 import com.danshacloud.entities.Payment;
 import lombok.extern.slf4j.Slf4j;

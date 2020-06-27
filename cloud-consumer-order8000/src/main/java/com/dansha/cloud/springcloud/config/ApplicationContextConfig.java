@@ -1,4 +1,4 @@
-package com.dansha.springcloud.config;
+package com.dansha.cloud.springcloud.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

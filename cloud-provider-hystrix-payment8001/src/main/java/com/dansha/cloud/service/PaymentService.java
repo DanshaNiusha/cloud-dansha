@@ -53,25 +53,25 @@ public class PaymentService {
         log.error("异常:",e);
         return "线程池：" + Thread.currentThread().getName() + "   系统繁忙，请稍后再试,id：" + id + "\t" + "o(╥﹏╥)o";
     }
-    //
-    // //服务熔断
-    // @HystrixCommand(fallbackMethod = "paymentCircuitBreaker_fallback",commandProperties = {
-    //         @HystrixProperty(name = "circuitBreaker.enabled",value = "true"),   //是否开启断路器
-    //         @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold",value = "10"),  //请求次数
-    //         @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds",value = "10000"),    //时间窗口期
-    //         @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "60"),    //失败率达到多少后跳闸
-    // })
-    // public String paymentCircuitBreaker(@PathVariable("id") Integer id){
-    //     if(id < 0){
-    //         throw new RuntimeException("******id 不能为负数");
-    //     }
-    //     String serialNumber = IdUtil.simpleUUID();  //UUID.randomUUID();
-    //
-    //     return Thread.currentThread().getName()+"\t"+"调用成功，流水号："+serialNumber;
-    // }
-    // public String paymentCircuitBreaker_fallback(@PathVariable("id") Integer id){
-    //     return "id 不能负数，请稍后再试，o(╥﹏╥)o  id："+id;
-    // }
+    
+    //服务熔断 10s内10次请求6次失败就进短路器就执行熔断, 10次访问失败了,然后输入正数也失败了(证明断路了), 然后慢慢的又恢复正常了
+    @HystrixCommand(fallbackMethod = "paymentCircuitBreaker_fallback",commandProperties = {
+            @HystrixProperty(name = "circuitBreaker.enabled",value = "true"),   //是否开启断路器
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold",value = "10"),  //请求次数
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds",value = "10000"),    //时间窗口期 10s
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "60"),    //时间窗口期内失败率达到多少后跳闸
+    })
+    public String paymentCircuitBreaker(@PathVariable("id") Integer id){
+        if(id < 0){
+            throw new RuntimeException("******id 不能为负数");
+        }
+        String serialNumber = IdUtil.simpleUUID();
+
+        return Thread.currentThread().getName()+"\t"+"调用成功，流水号："+serialNumber;
+    }
+    public String paymentCircuitBreaker_fallback(@PathVariable("id") Integer id){
+        return "id 不能负数，请稍后再试，o(╥﹏╥)o  id："+id;
+    }
     
     
 }

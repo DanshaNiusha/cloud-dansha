@@ -16,6 +16,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @Slf4j
+@DefaultProperties(defaultFallback = "payment_Global_FallbackMethod") // 指定默认的全局降级的方法
 public class OrderHystrixController {
     
     @Resource
@@ -27,16 +28,24 @@ public class OrderHystrixController {
     }
     
     @GetMapping("/consumer/payment/hystrix/timeout/{id}")
-    @HystrixCommand(fallbackMethod = "paymentTimeOutFallBackMethod", commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "7000")
-    })
+    // @HystrixCommand(fallbackMethod = "paymentTimeOutFallBackMethod", commandProperties = {
+    //         @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "7000")
+    // })
+    @HystrixCommand
     public String paymentInfo_TimeOut(@PathVariable("id") Integer id) {
-        // int age = 10/0;
+        int age = 10/0;
         return paymentHystrixService.paymentInfo_TimeOut(id);
     }
     
     
-    public String paymentTimeOutFallBackMethod(@PathVariable("id") Integer id){
+    public String paymentTimeOutFallBackMethod(@PathVariable("id") Integer id) {
         return "我是消费者8000，对方支付系统繁忙，请稍后再试，o(╥﹏╥)o1";
+    }
+    
+    /**
+     * 全局 fallback 方法, 消费方异常会进这个global, 服务方异常会走fallbackservice的逻辑
+     */
+    public String payment_Global_FallbackMethod() {
+        return "Global异常处理信息，请稍后再试。/(╥﹏╥)/~~";
     }
 }

@@ -21,7 +21,7 @@ import javax.sql.DataSource;
  * @date 2020/3/25 21:26
  */
 @Configuration
-@MapperScan({"com.atguigu.springcloud.alibaba.dao"})
+@MapperScan({"com.dansha.cloud.dao"})
 public class MyBatisConfig {
     @Value("${mybatis.mapper-locations}")
     private String mapperLocations;
